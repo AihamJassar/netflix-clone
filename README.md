@@ -1,1 +1,1 @@
-# Netflex Clone
+# Netflix Clone
