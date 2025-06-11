@@ -8,6 +8,7 @@ import { Toaster } from "react-hot-toast";
 import { useAuthStore } from "./store/authUser";
 import { useEffect } from "react";
 import { Loader } from "lucide-react";
+import { WatchPage } from "./pages/WatchPage";
 
 function App() {
   const { user, authCheck, isLoading } = useAuthStore();
@@ -15,8 +16,8 @@ function App() {
   useEffect(() => {
     authCheck();
   }, [authCheck]);
-  
-  console.log(user)
+
+  console.log(user);
   if (isLoading)
     return (
       <div className="h-screen">
@@ -31,12 +32,16 @@ function App() {
       <Routes>
         <Route index element={<HomePage />} />
         <Route
-          path="signup"
+          path="/signup"
           element={!user ? <Signup /> : <Navigate to={"/"} />}
         />
         <Route
-          path="login"
+          path="/login"
           element={!user ? <Login /> : <Navigate to={"/"} />}
+        />
+        <Route
+          path="/watch/:id"
+          element={user ? <WatchPage /> : <Navigate to={"/login"} />}
         />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>

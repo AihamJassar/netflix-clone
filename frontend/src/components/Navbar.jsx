@@ -2,25 +2,34 @@ import { useState } from "react";
 import { Link } from "react-router";
 import { LogOut, Menu, Search } from "lucide-react";
 import { useAuthStore } from "../store/authUser";
+import { useContentStore } from "../store/content";
 
 export const Navbar = () => {
   const { user, logout } = useAuthStore();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const toggleMobileMenu = () => setIsMobileMenuOpen(!isMobileMenuOpen);
-  console.log(user);
+  const { setContentType } = useContentStore();
   return (
     <header className="flex flex-wrap items-center justify-between max-w-6xl mx-auto p-4 h-20">
       <div className="flex items-center gap-1- z-50">
         <Link to={"/"}>
-          <img src="netflix-logo.png" alt="Logo" className="w-32 sm:w-40" />
+          <img src="/netflix-logo.png" alt="Logo" className="w-32 sm:w-40" />
         </Link>
 
         {/* desktop navbar items */}
         <div className="hidden sm:flex items-center gap-2">
-          <Link to={""} className="hover:underline">
+          <Link
+            to={""}
+            className="hover:underline"
+            onClick={() => setContentType("movie")}
+          >
             Movies
           </Link>
-          <Link to={""} className="hover:underline">
+          <Link
+            to={""}
+            className="hover:underline"
+            onClick={() => setContentType("tv")}
+          >
             TV Shows
           </Link>
           <Link to={"/history"} className="hover:underline">
