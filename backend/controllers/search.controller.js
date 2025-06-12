@@ -22,7 +22,7 @@ exports.searchPerson = async (req, res) => {
           image: data.results[0].profile_path,
           title: data.results[0].name,
           searchType: "Person",
-          createAt: new Date(),
+          createdAt: new Date(),
         },
       },
     });
@@ -55,7 +55,7 @@ exports.searchMovie = async (req, res) => {
           image: data.results[0].poster_path,
           title: data.results[0].title,
           searchType: "Movie",
-          createAt: new Date(),
+          createdAt: new Date(),
         },
       },
     });
@@ -87,7 +87,7 @@ exports.searchTV = async (req, res) => {
           image: data.results[0].poster_path,
           title: data.results[0].name,
           searchType: "TV show",
-          createAt: new Date(),
+          createdAt: new Date(),
         },
       },
     });

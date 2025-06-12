@@ -9,6 +9,8 @@ import { useAuthStore } from "./store/authUser";
 import { useEffect } from "react";
 import { Loader } from "lucide-react";
 import { WatchPage } from "./pages/WatchPage";
+import { SearchPage } from "./pages/SearchPage";
+import { SearchHistoryPage } from "./pages/SearchHistoryPage";
 
 function App() {
   const { user, authCheck, isLoading } = useAuthStore();
@@ -17,7 +19,6 @@ function App() {
     authCheck();
   }, [authCheck]);
 
-  console.log(user);
   if (isLoading)
     return (
       <div className="h-screen">
@@ -43,7 +44,15 @@ function App() {
           path="/watch/:id"
           element={user ? <WatchPage /> : <Navigate to={"/login"} />}
         />
-        <Route path="*" element={<NotFoundPage />} />
+        <Route
+          path="/search"
+          element={user ? <SearchPage /> : <Navigate to={"/login"} />}
+        />
+        <Route
+          path="/history"
+          element={user ? <SearchHistoryPage /> : <Navigate to={"/login"} />}
+        />
+        <Route path="/*" element={<NotFoundPage />} />
       </Routes>
       <Footer />
 
