@@ -4,27 +4,29 @@ import { create } from "zustand";
 
 export const useAuthStore = create((set) => ({
   user: null,
+  isSigningUp: false,
+  isLoggingIn: false,
   isLoading: true,
   signup: async (credentials) => {
     try {
-      set({ isLoading: true });
+      set({ isSigningUp: true });
       const response = await axios.post("/api/v1/auth/signup", credentials);
-      set({ user: response.data.user, isLoading: false });
+      set({ user: response.data.user, isSigningUp: false });
       toast.success("Account created successfully");
     } catch (error) {
       toast.error(error.response.data.message) || "Signup failed";
-      set({ user: null, isLoading: false });
+      set({ user: null, isSigningUp: false });
     }
   },
   login: async (credentials) => {
     try {
-      set({ isLoading: true });
+      set({ isLoggingIn: true });
       const response = await axios.post("/api/v1/auth/login", credentials);
-      set({ user: response.data.user, isLoading: false });
+      set({ user: response.data.user, isLoggingIn: false });
       toast.success("Login successfully");
     } catch (error) {
       toast.error(error.response.data.message || "Login failed");
-      set({ user: null, isLoading: false });
+      set({ user: null, isLoggingIn: false });
     }
   },
   logout: async () => {

@@ -24,7 +24,7 @@ app.use("/api/v1/movie", protectRoute, movieRouter);
 app.use("/api/v1/tv", protectRoute, tvRouter);
 app.use("/api/v1/search", protectRoute, searchRouter);
 
-if (env.process.NODE_ENV === "production") {
+if (process.env.NODE_ENV === "production") {
   app.use(express.static(path.join(__dirname, "/frontend/dist")));
 
   app.get("{*splat}", (req, res) => {
